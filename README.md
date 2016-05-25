@@ -16,6 +16,10 @@ E' la gestione del campo di Accoglienza l'ambizioso obiettivo di questo progetto
 
 >Nelle catastrofi è fondamentale conoscere se una persona è in salvo o è ancora da ricercare, ad esempio nel caso di un terremoto sotto le macerie. L'anagrafica del campo permette di sapere real-time chi vi abita e di ognuno i rispettivi dati.
 
+- Gestire la disposizione del campo
+
+>Conoscere la numerazione delle tende e la loro posizione è fondamentale anche e soprattutto per collocare gli sfollati. Il gestionale potrà generare mappe stampabili e fornire al personale un'interfaccia grafica piacevole.
+
 - Comunicare in real time con gli abitanti
 
 >Durante le grandi catastrofi e nei momenti (giorni) successivi le reti cellulari e le linee telefoniche classiche divengono inutilizzabili. Gli abitanti della tendopoli avranno una rete Wireless dedicata all'interno del campo per ricevere sui propri devices le informazioni importanti.
