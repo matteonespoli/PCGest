@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<title>Mappa</title>
+	
+	<!-- Bootstrap core CSS -->
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="./jquery-ui/jquery-ui.css">
+	<script src="./jquery-ui/jquery.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
+	<style>
+		.draggable { float: left; margin: 0; border: 0; background-color: orange; border-radius: 10px; display:flex; justify-content:center; align-items:center; font-size: 15px; cursor: move; }
+		.draggable-icon { margin: 0; border: 0; background-color: orange; border-radius: 10px; display:flex; justify-content:center; align-items:center; font-size: 35px; cursor: pointer; }
+		canvas{ marginLeft: 0px; marginTop: 0px;
+				top: 0px; left: 0px; }
+	</style>
+	<script>
+		$(function() {
+		$(".draggable").draggable({
+			grid: [ 30, 30 ], 
+			containment: "parent", 
+			scroll: false,
+			drag: function( event, ui ) {
+			 var id_box=document.getElementById(ui.helper[0].id).getAttribute("data-id");
+			 boxes[(id_box-1)].x=ui.position.left;
+			 boxes[(id_box-1)].y=ui.position.top;
+			}
+		});
+		});
+	</script>
+  </head>
+<body>
+		<div class="container">.
+		<h1 style="text-align: center;">Mappa del campo</h1>
+		<div class="col-md-9">
+		<div id="container" style="position: relative; width: 751px; height: 451px;">
+				<canvas id="canvas" style="position: absolute; z-index: -1;"></canvas>
+		</div>
+		</div>
+		<div class="col-md-3">
+		<span id="txt"></span>
+		<div id="sample-div" class="draggable-icon" style="width:80px; height:80px;">S#</div>
+		<br>
+		<div class="form-group">
+			<label for="select_tenda">Tipologia:</label>
+			<select id="select_tenda" class="form-control input-lg">
+			  <option value="0">Tenda piccola (1x1)</option>
+			  <option value="1">Tenda lunga (1x2)</option>
+			  <option value="2">Tenda media (2x2)</option>
+			  <option value="3">Tenda grande (3x3)</option>
+			  <option value="4">Cucina (5x3)</option>
+			</select>
+		</div>
+		<br>
+		<button id="button1" class="btn btn-warning"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Aggiungi alla mappa</button>
+		<br>
+		<button id="button2" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Salva</button>
+		<form id="frm1" method="POST" action="save_map.php"><input type="hidden" name="map_json" id="map_json"/></form>
+		</div></div>
+	<script src="./bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		canvas = document.getElementById('canvas');
+		ctx = canvas.getContext('2d');
+		
+		canvas.onselectstart = function () { return false; }
+		
+		canvas.width = $("#container").width();
+		canvas.height = $("#container").height();
+		
+		var bw = 750;
+		var bh = 450;
+		var p = 0;
+
+		for (var x = 0; x <= bw; x += 30) {
+			ctx.moveTo(0.5 + x + p, p);
+			ctx.lineTo(0.5 + x + p, bh + p);
+		}
+
+
+		for (var x = 0; x <= bh; x += 30) {
+			ctx.moveTo(p, 0.5 + x + p);
+			ctx.lineTo(bw + p, 0.5 + x + p);
+		}
+
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+		var count=0;
+		
+		$("#button2").click(function(){
+			var recursiveEncoded = JSON.stringify(boxes);
+			document.getElementById("map_json").value=recursiveEncoded;
+			alert(recursiveEncoded);
+			document.getElementById("frm1").submit();
+		});
+		
+		$("#button1, #sample-div").click(function(){
+			count++;
+			var dim=[[1,1],[1,2],[2,2],[3,3],[5,3]];
+			var scelta=document.getElementById("select_tenda").value;
+			var altezza=((dim[scelta][1]-1)*30)+30;
+			var larghezza=((dim[scelta][0]-1)*30)+30;
+			 
+			$("<div/>", {
+			   "class": "draggable",
+			   "id": "draggable"+count,
+			   "data-id": count,
+				text: "S"+count,
+			  }).appendTo("#container");
+			  
+			 $("#draggable"+count).css({ 
+				position: "absolute",
+				marginLeft: 0, marginTop: 0,
+				top: 0, left: 0, width:larghezza, height:altezza
+			 });
+			 
+			 $("#draggable"+count).draggable({
+				grid: [ 30, 30 ], 
+				containment: "parent", 
+				scroll: false,
+				drag: function( event, ui ) {
+				 var id_box=document.getElementById(ui.helper[0].id).getAttribute("data-id");
+				 boxes[(id_box-1)].x=ui.position.left;
+				 boxes[(id_box-1)].y=ui.position.top;
+				 //console.log(boxes[(id_box-1)]);
+				}
+			});
+			 
+			 addRect(0, 0, larghezza, altezza, "#FF0000", "S"+count);
+		});
+		if($( window ).width()<1182){
+			alert("Risoluzione troppo bassa. Impossibile caricare.")
+			location.href=".";
+		}
+	</script>
+</body>
+</html>
