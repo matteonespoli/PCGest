@@ -8,7 +8,7 @@ ITIS P. Paleocapa (BG)
 
 ####L'idea
 Sin dalla prima lezione del Corso di Protezione Civile, a cui ho partecipato quest'anno, mi sono reso conto dell'importanza della macchina complessa del soccorso costituita da forze sia volontarie che non. Per la sua complessità questa macchina deve essere gestita al meglio e, fortunatamente, il Servizio Nazionale di Protezione Civile è dotato di regole puntuali in merito e un ampio sistema di prevenzione. 
-Una mancanza del sistema è sicuramente individuabile nel post-emergenza, nella fase di accoglienza, quando, da un giorno all'altro qualche migliaio di persone sono costrette a vivere in una nuova "città", la tendopoli, o Campo di Accoglienza.
+Una mancanza del sistema è sicuramente individuabile nel "post-evento", nella fase di accoglienza, quando, da un giorno all'altro qualche migliaio di persone sono costrette a vivere in una nuova "città", la tendopoli, o Campo di Accoglienza.
 E' la gestione del campo di Accoglienza l'ambizioso obiettivo di questo progetto.
 
 ####Cosa permette di fare?
