@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <meta charset="UTF-8" />
+    <title>HTML5 Canvas demo 1</title>
+    
+    <!-- A border on the canvas helps us see the edges -->
+    <style type="text/css">
+      #container { position: relative; }
+      #canvas { border: 0px; background: #fff; margin: 0; padding: 0;}
+    </style> 
+    <script type="text/javascript" src="javascript.js"></script>
+  </head>
+  <body onLoad="init()">
+    <center>
+    <div id="container">
+    <canvas id="canvas" width="961px" height="721px">
+    This text is displayed if your browser does not support HTML5 Canvas.
+    </canvas>
+    </div>
+	</center>  
+	<select id="ddlViewBy">
+		<option value="1">Tenda</option>
+		<option value="2">Tenda2</option>
+	</select>
+	<button onclick="rettangolo();">Nuovo</button>
+	<script>
+		var count=0;
+		function rettangolo()
+		{
+			var e = document.getElementById("ddlViewBy");
+			var strUser = e.options[e.selectedIndex].value;
+			var Bx=0, By=0; Bcolor=0;
+			if(strUser=="1")
+			{
+				Bx=1; By=2; Bcolor="#FF0000";
+			}
+			else if(strUser=="2")
+			{
+				Bx=2; By=2; Bcolor="#00FF00";
+			}
+			count++;
+			addRect(120, 120, Bx*40, By*40, Bcolor, "S"+count);
+		}
+	</script>
+  </body>
+</html>

@@ -7,6 +7,23 @@ body {
   padding-top: 50px;
 }
 
+.img-hover img {
+    -webkit-transition: all .3s ease; /* Safari and Chrome */
+  	-moz-transition: all .3s ease; /* Firefox */
+  	-o-transition: all .3s ease; /* IE 9 */
+  	-ms-transition: all .3s ease; /* Opera */
+  	transition: all .3s ease;
+}
+.img-hover img:hover {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform:translateZ(0) scale(0.90); /* Safari and Chrome */
+    -moz-transform:scale(0.90); /* Firefox */
+    -ms-transform:scale(0.90); /* IE 9 */
+    -o-transform:translatZ(0) scale(0.90); /* Opera */
+    transform:translatZ(0) scale(0.90);
+}
+
 .riga{
 	cursor:pointer;
 }

@@ -31,6 +31,8 @@
     <div class="container">
 		<?php
 		
+			$status=false;
+		
 			class Box {
 			  public $x = 0;
 			  public $y = 0;
@@ -43,7 +45,9 @@
 
 			if(isset($_POST["map_json"]) && $_POST["map_json"]!="")
 			{
-				
+				$query = "begin";
+				$result = mysqli_query($conn, $query);
+			
 				$boxes = array();
 				
 				$tempData = html_entity_decode($_POST["map_json"]);
@@ -51,8 +55,15 @@
 				
 				$query = "DELETE FROM `campo`;";
 					if (!mysqli_query($conn, $query)) {
-						echo("Error description: " . mysqli_error($conn));
+						//echo("Error description: " . mysqli_error($conn));
+						$query = "rollback";
+						/*$result = mysqli_query($conn, $query);
+						echo("Error description: " . mysqli_error($conn));*/
+						$status=false;
+						echo '<p><b>Attenzione</b> si sta tentando di modificare una tenda gi&agrave; assegnata.</p>';
 					}
+					else
+						$status=true;
 				
 				foreach ($data as $key)
 				{
@@ -70,10 +81,16 @@
 					
 					if (!mysqli_query($conn, $query)) {
 						echo("Error description: " . mysqli_error($conn));
+						$status=false;
+					}
+					else
+					{
+						$query = "commit";
+						$result = mysqli_query($conn, $query);
 					}
 				}
-				echo "<h2>Mappa aggiornata</h2>";
-
+				if($status)
+					echo "<h2>Mappa aggiornata</h2>";
 			}
 		?>
 	</div>

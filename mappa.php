@@ -1,5 +1,6 @@
 <?php
 	include("include/connection.php");
+	include("include/menuprinter.php");
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -22,7 +23,17 @@
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="text/javascript" src="javascript.js"></script>
 	<style>
-		.draggable { margin: 0; border: 0; background-color: #004080; color: white; weight:bold; display:flex; justify-content:center; align-items:center; font-size: 15px; cursor: move; }
+		.draggable { margin: 0; 
+			border: 0; 
+			/* background-color: #004080; */
+			color: white; 
+			weight:bold; 
+			display:flex; 
+			justify-content:center; 
+			align-items:center; 
+			font-size: 15px; 
+			cursor: move; 
+		}
 		.draggable-icon { margin: 0; border: 0; background-color: #004080; color: white; weight:bold; border-radius: 10px; display:flex; justify-content:center; align-items:center; font-size: 35px; cursor: pointer; }
 		canvas{ marginLeft: 0px; marginTop: 0px; top: 0px; left: 0px; }
 				
@@ -67,7 +78,7 @@
 		/* Position and style the close button (top right corner) */
 		.closebtn {
 			position: absolute;
-			top: 0;
+			top: 40px;
 			right: 25px;
 			font-size: 36px !important;
 			margin-left: 50px;
@@ -114,7 +125,7 @@
 		});*/
 		
 		var dim_campo=[100,50]; //dimensioni campo (richieste all'utente)
-		<?php
+		<?php			
 			$query = "SELECT name, value FROM `settings` WHERE name='Wcampo' OR name='Hcampo'";
 			if ($result = mysqli_query($conn, $query)) {
 				while($row = mysqli_fetch_assoc($result))
@@ -134,6 +145,9 @@
 	</script>
   </head>
 <body>
+	<?php
+		print_nav();
+	?>
 		<div id="mySidenav" class="no-print sidenav">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 			<div class="container" style="width:300px;">
@@ -164,10 +178,10 @@
 			</div>
 		</div>
 
-
-		<h1 class="print" style="text-align: center;">Dipartimento della Protezione Civile</h1>
-		<h2 class="print" style="text-align: center;">Mappa del campo</h2>
-		<div id="main" class="container">
+		<div id="main" class="container" style="padding-top: 40px;">
+			<h1 class="print" style="text-align: center;">Dipartimento della Protezione Civile</h1>
+			<h2 class="print" style="text-align: center;">Mappa del campo</h2>
+		
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="print" id="container" style="overflow: hidden; position: relative;">
@@ -250,6 +264,7 @@
 		{
 			count++;
 			var dim=[[1,1],[1,2],[2,2],[3,3],[5,3]];
+			var colori=["#004080","green","red","blue","orange"]
 			if(tipo==null)
 				var scelta=document.getElementById("select_tenda").value;
 			else
@@ -271,7 +286,8 @@
 			 $("#draggable"+count).css({ 
 				position: "absolute",
 				marginLeft: 0, marginTop: 0,
-				top: posY, left: posX, width:larghezza, height:altezza
+				top: posY, left: posX, width:larghezza, height:altezza,
+				"background-color": colori[scelta]
 			 });
 			 
 			 $("#draggable"+count).draggable({
